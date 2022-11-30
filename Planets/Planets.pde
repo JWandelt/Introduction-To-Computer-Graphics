@@ -1,18 +1,20 @@
-PImage bg;
-
 void setup() {
   size(1920, 1080, P3D);
   noStroke();  
-  //bg = loadImage("bg.jpeg");
+  bg = loadImage("bg.jpg");
 }
 
 float time = 0.f;
+PImage bg;
 
 void draw()
 {
   background(0);
-  
+  image(bg, 0, 0);
+   stroke(0); 
   translate(width/2, height/2);
+  
+
   
   //Star
   pushMatrix();
@@ -21,7 +23,7 @@ void draw()
     fill(255, 86, 67);
     circle(0, 0, 100);
   popMatrix();
-  
+
   //First planet
   pushMatrix();
     rotate(time*1.9);
