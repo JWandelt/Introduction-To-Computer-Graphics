@@ -1,9 +1,19 @@
 PShape dragon;
+PShape spaceShip;
+// Declare global variables
+float x, y, z; // Position of the object
+float rx, ry, rz; // Rotation of the object
+float speed = 20; // Speed of the object
 
 void setup() {
   size(1920, 1080, P3D);
   noStroke();  
   dragon = loadShape("alduin-dragon.obj");
+  spaceShip = loadShape("justigue league flying vehicle.obj");
+   // Initialize the position of the object
+  x = 0;
+  y = 0;
+  z = 0;
 }
 
 float time = 0.f;
@@ -136,4 +146,39 @@ void draw()
   popMatrix();
   
   time += .01f;
+  
+   if (keyPressed) {
+    if (keyCode == UP) {
+      y -= speed;
+    } else if (keyCode == DOWN) {
+      y += speed;
+    } else if (keyCode == LEFT) {
+      x -= speed;
+    } else if (keyCode == RIGHT) {
+      x += speed;
+    } else if (key == 'w') {
+      z -= speed;
+    } else if (key == 's') {
+      z += speed;
+    } else if (key == 'a') {
+      rx -= 0.1;
+    } else if (key == 'd') {
+      rx += 0.1;
+    } else if (key == 'q') {
+      ry -= 0.1;
+    } else if (key == 'e') {
+      ry += 0.1;
+    } else if (key == 'z') {
+      rz -= 0.1;
+    } else if (key == 'x') {
+      rz += 0.1;
+    }
+  }
+
+  // Draw the object at the updated position and rotation
+  translate(x, y, z);
+  rotateX(rx);
+  rotateY(ry);
+  rotateZ(rz);
+  shape(spaceShip, 0, 0);
 }
