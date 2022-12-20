@@ -5,6 +5,14 @@ float x, y, z; // Position of the object
 float rx, ry, rz; // Rotation of the object
 float speed = 20; // Speed of the object
 
+float wheel = 0;
+
+void mouseWheel(MouseEvent event) {
+  // Update the mouseWheel variable with the new wheel value
+  wheel += event.getCount();
+  println("Mouse wheel moved");
+}
+
 void setup() {
   size(1920, 1080, P3D);
   noStroke();  
@@ -174,6 +182,11 @@ void draw()
       rz += 0.1;
     }
   }
+
+  float fov = radians(map(wheel, -1, 1, 30, 120));
+  float cameraZ = (height/2.0) / tan(fov/2.0);
+  perspective(fov, float(width)/float(height), cameraZ/10.0, cameraZ*10.0);
+  //camera(0, 0, (height/2.0) / tan(radians(fov / 2.0)), 0, 0, 0, 0, 1, 0);
 
   // Draw the object at the updated position and rotation
   translate(x, y, z);
